@@ -1,6 +1,10 @@
 # Llama4 Token Editor
 
-LLaMA Token Editor는 대형 언어 모델(LLM)의 토크나이저를 분석하고, 특정 범주의 토큰 가중치를 조정할 수 있는 도구입니다. 이 도구는 주로 LLaMA 계열 모델의 토큰화 방식을 분석하고, 한글 및 영어 토큰의 가중치를 조정하는 데 사용됩니다.
+LLaMA Token Editor는 대형 언어 모델(LLM)의 토크나이저를 분석하고, 특정 범주의 토큰 가중치를 조정할 수 있는 도구입니다. 이 도구는 주로 Llama, Qwen 계열 모델의 토큰화 방식을 분석하고, 한글 및 영어 토큰을 분석하고 일부 가중치를 조정하는 데 사용됩니다.
+
+![image](https://github.com/user-attachments/assets/3cd8c885-01de-4d9e-b3f3-93804efc86eb)
+
+
 
 ## 주요 기능
 
@@ -106,7 +110,7 @@ print(generated_text)
 
 ## 분석 예시
 
-Llama-3.3-70B-Instruct 모델 분석 결과:
+Llama-4-Scout-17B-16E-Instruct 모델 분석 결과:
 - 분석 대상 최대 토큰 ID: 201,135
 - 분석 대상 토큰 수: 201,032
 - 순수 영문 토큰 수: 	36,668
@@ -117,7 +121,7 @@ Llama-3.3-70B-Instruct 모델 분석 결과:
 
 ## 한글 토큰 분석 원리
 
-이 도구는 UTF-8 인코딩을 기반으로 한글 문자를 식별합니다:
+이 도구는 UTF-8 인코딩과 BPE 알고리즘을 역공학으로 분석하여 한글 문자를 식별합니다:
 - `can_be_hangul_utf8()`: 바이트 또는 바이트 시퀀스가 한글의 일부가 될 수 있는지 확인
 - `is_complete_hangul_utf8()`: 3바이트 시퀀스가 완성형 한글인지 확인
 
