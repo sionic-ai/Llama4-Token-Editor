@@ -35,6 +35,7 @@ llama4의 토크나이저 구성이 한국어 표현 관점에서 기존 Llama3.
 - **토큰 가중치 조정**: 분석된 카테고리에 따라 토큰의 가중치를 조정할 수 있음
   - `categorized_token_ids.txt`에 있는 토큰의 가중치 증가
   - `uncategorized_token_ids.txt`에 있는 토큰의 가중치 감소
+  - `asjust_hangul.py`를 사용하여 한글 표현 가능성 토큰의 가중치를 조정할 수 있음
 
 ## 지원 모델
 
@@ -56,7 +57,7 @@ pip install -r requirements.txt
 ### 토큰 분석 실행
 
 ```bash
-python token_analyzer.py --model_id "모델_경로_또는_이름"
+python main.py --model_id "모델_경로_또는_이름"
 ```
 
 매개변수:
@@ -69,10 +70,16 @@ python token_analyzer.py --model_id "모델_경로_또는_이름"
 2. `categorized_token_ids.txt`: 분류된 토큰 ID 목록 (가중치 상향 조정용)
 3. `uncategorized_token_ids.txt`: 미분류 토큰 ID 목록 (가중치 하향 조정용)
 
-### 토큰 가중치 조정 예시
+### 한글 토큰 가중치 조정 예시
 
-토큰 가중치를 조정하려면 생성된 ID 목록 파일을 읽어들여 다음과 같이 사용할 수 있습니다:
+생성된 ID 목록 파일을 읽어들여 특정 카테고리의 토큰 가중치를 조정할 수 있습니다. 아래는 한글 토큰 가중치를 조정하여 Llama-4 모델을 호출하는 예시입니다.
 
+```bash
+python main.py --model_id unsloth/Llama-4-Scout-17B-16E-Instruct
+python adjust_hangul.py
+```
+
+### 일반적인 토큰 가중치 조정 예시
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer, LogitsProcessorList
 import torch
