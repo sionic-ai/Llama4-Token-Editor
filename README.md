@@ -46,7 +46,7 @@ llama4의 토크나이저 구성이 한국어 표현 관점에서 기존 Llama3.
 ## 설치 방법
 
 ```bash
-git clone https://github.com/yourusername/Llama4-Token-Editor.git
+git clone https://github.com/sionic-ai/Llama4-Token-Editor.git
 cd Llama4-Token-Editor
 pip install -r requirements.txt
 ```
