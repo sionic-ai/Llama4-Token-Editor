@@ -73,6 +73,10 @@ python token_analyzer.py --model_id "모델_경로_또는_이름"
 
 토큰 가중치를 조정하려면 생성된 ID 목록 파일을 읽어들여 다음과 같이 사용할 수 있습니다:
 
+
+### transformers
+
+
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer, LogitsProcessorList
 import torch
@@ -123,6 +127,60 @@ output = model.generate(
 # 결과 출력
 generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
 print(generated_text)
+```
+
+### vLLM
+
+
+```python
+https://github.com/vllm-project/vllm/blob/95d63f38c039e6fce57cf9cddb4c32bbc655a376/vllm/entrypoints/openai/api_server.py#L465-L485
+
+@router.post("/v1/chat/completions",
+             dependencies=[Depends(validate_json_request)])
+@with_cancellation
+@load_aware_call
+async def create_chat_completion(request: ChatCompletionRequest,
+                                 raw_request: Request):
+    handler = chat(raw_request)
+    if handler is None:
+        return base(raw_request).create_error_response(
+            message="The model does not support Chat Completions API")
+    logit_bias_list = [100145, 105714, 115668, 104949, 104437..]
+    logit_bias = {str(token) : 20 for token in logit_bias_list}
+    request.logit_bias=logit_bias
+
+    generator = await handler.create_chat_completion(request, raw_request)
+
+    if isinstance(generator, ErrorResponse):
+        return JSONResponse(content=generator.model_dump(),
+                            status_code=generator.code)
+
+    elif isinstance(generator, ChatCompletionResponse):
+        return JSONResponse(content=generator.model_dump())
+
+    return StreamingResponse(content=generator, media_type="text/event-stream")
+
+```
+
+
+### OpenAI API
+
+
+```python
+import openai
+
+logit_bias_list = [100145, 105714, 115668, 104949, 104437..]
+logit_bias = {str(token) : 20 for token in logit_bias_list}
+
+response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=[
+        {"role": "user", "content": "한국에 대해 이야기해 주세요."}
+    ],
+    logit_bias=logit_bias
+)
+
+print(response.choices[0].message['content'])
 ```
 
 ## 분석 예시
