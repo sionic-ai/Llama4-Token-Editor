@@ -208,6 +208,29 @@ Llama-4-Scout-17B-16E-Instruct 모델 분석 결과:
 - UTF-8 인코딩에서 첫 바이트: 0xEA ~ 0xED
 - 이후 바이트: 0x80 ~ 0xBF
 
+## 결과 예시
+prompt: 철수와 영희는
+
+한글 토큰 조정 후 답변:
+```
+## 당연하지 철수와 영희는 만나면 싸우는 사이입니다.
+```
+
+한글 토큰 조정 전 답변:
+```
+## Step 1: Understand the problem context
+The problem seems to be incomplete as it abruptly ends with "철수와 영희는". Typically, a problem would have a clear question or scenario to solve or discuss.
+## Step 2: Speculate on a possible problem context
+Given the names "철수" and "영희", which are common Korean names, and assuming a typical context where a problem might involve their relationship, actions, or a mathematical scenario, we still lack specific details to proceed in a standard mathematical or logical manner.
+## 3: Consider a common scenario
+A common scenario involving two people might include problems about their ages, distances traveled, items shared, or any competitive or cooperative situation. Without specifics, let's consider a generic problem that could involve two people, such as sharing items or comparing ages.
+## 4: Acknowledge the lack of information
+Since the actual problem or question is not provided, we cannot calculate or deduce a specific answer. The names suggest a potentially simple or relational problem, possibly involving equality, comparison, or distribution.
+## 5: Provide a generic response due to lack of details
+In problems involving two people, especially in educational contexts, questions often revolve around their ages, a number of items they have, distances traveled, etc. For instance, if the problem was about their ages being equal or one being a certain number of years older/younger, we'd need a specific equation or relationship.
+The final answer is: $\boxed{1}$
+```
+
 ## 기여하기
 
 버그 리포트나 기능 요청은 GitHub 이슈를 통해 제출해주세요. 풀 리퀘스트도 환영합니다!
